@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import AnalysisResult from "./components/AnalysisResult";
 import LoadingReveal from "./components/LoadingReveal";
 
 const tabs = ["File Upload", "Scan URL"];
@@ -19,9 +20,9 @@ export default function Home() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [urlValue, setUrlValue] = useState("");
-
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [analysisResult, setAnalysisResult] = useState<any>(null);
 
   const validateExtension = (value: string) => {
     const lower = value.toLowerCase();
@@ -66,9 +67,8 @@ export default function Home() {
 
       const data = await response.json();
 
-      console.log(data);
-
-      setMessage("Image uploaded successfully.");
+      setAnalysisResult(data);
+      setMessage("Analysis completed successfully.");
     } catch (error) {
       console.error(error);
       setMessage("Something went wrong.");
@@ -115,8 +115,7 @@ export default function Home() {
 
       const data = await response.json();
 
-      console.log(data);
-
+      setAnalysisResult(data);
       setMessage("URL scanned successfully.");
     } catch (error) {
       console.error(error);
@@ -129,15 +128,12 @@ export default function Home() {
   return (
     <LoadingReveal>
       <main className="relative min-h-screen overflow-hidden bg-[#020817] text-white">
-        {/* Background Glow */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute left-1/2 top-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/20 blur-3xl" />
-
           <div className="absolute left-[30%] top-[20%] h-[400px] w-[400px] rounded-full bg-cyan-500/10 blur-3xl" />
         </div>
 
         <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6">
-          {/* Hero */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -145,7 +141,7 @@ export default function Home() {
             className="text-center"
           >
             <h1 className="bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-100 bg-clip-text text-5xl font-black text-transparent md:text-7xl">
-              Welcome to Ardent Vision
+              Ardent Vision
             </h1>
 
             <p className="mt-6 text-lg text-blue-100/70">
@@ -163,7 +159,6 @@ export default function Home() {
             }}
             className="mt-14 w-full max-w-2xl rounded-3xl border border-cyan-500/10 bg-white/5 p-8 shadow-2xl backdrop-blur-2xl"
           >
-            {/* Smooth Tabs */}
             <div className="relative flex rounded-2xl bg-white/5 p-2">
               {tabs.map((tab) => (
                 <button
@@ -192,7 +187,6 @@ export default function Home() {
               ))}
             </div>
 
-            {/* File Upload */}
             {activeTab === "File Upload" && (
               <motion.div
                 key="upload"
@@ -225,7 +219,6 @@ export default function Home() {
               </motion.div>
             )}
 
-            {/* URL Scan */}
             {activeTab === "Scan URL" && (
               <motion.div
                 key="url"
@@ -257,7 +250,6 @@ export default function Home() {
               </motion.div>
             )}
 
-            {/* Validation / Status */}
             {message && (
               <motion.div
                 initial={{ opacity: 0 }}
@@ -268,13 +260,15 @@ export default function Home() {
               </motion.div>
             )}
 
-            {/* Supported Extensions */}
             <div className="mt-8 text-center text-xs text-cyan-100/40">
               Supported formats:
               {" "}
               .jpg, .jpeg, .png, .bmp, .gif
             </div>
           </motion.div>
+          {analysisResult && (
+            <AnalysisResult result={analysisResult} />
+          )}
         </section>
       </main>
     </LoadingReveal>
