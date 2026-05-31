@@ -12,13 +12,12 @@ yarn dev
 ## Front end UI
 <img width="646" height="527" alt="image" src="https://github.com/user-attachments/assets/0d8474bb-5477-4a23-98f4-7218d6dc4a41" />
 
-
-<img width="728" height="422" alt="image" src="https://github.com/user-attachments/assets/ba518266-2697-4078-b202-bb1944321d54" />
-
+<img width="860" height="641" alt="image" src="https://github.com/user-attachments/assets/f466dd62-a33c-432e-a3f0-3424ac98f31e" />
 
 ## Example analysis of the following image:
 
-<img width="1161" height="639" alt="image" src="https://github.com/user-attachments/assets/a644bc2b-13f5-4fe6-9041-6d04483ea563" />
+<img width="1263" height="874" alt="image" src="https://github.com/user-attachments/assets/7a873656-3055-4038-88c8-d35301de6c98" />
+
 
 ## Result (JSON response from Azure AI Vision API and Azure Cognitive Services).
 
@@ -126,6 +125,12 @@ yarn dev
   "...": "Additional fields omitted for README.md"
 }
 ```
+
+## Result showing within the UI based uppon JSON response
+
+<img width="967" height="839" alt="image" src="https://github.com/user-attachments/assets/311a5603-f259-4efa-b02b-91ff9b90e51c" />
+
+
 ## Additional
 
 Ensure that you have AzureAIVision API running and then Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The Azure AI Vision API must be configured to connect to Azure Cognitive Services (Vision) for this to extract the uploaded file or URL.
