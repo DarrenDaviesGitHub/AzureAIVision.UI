@@ -23,6 +23,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [analysisResult, setAnalysisResult] = useState<any>(null);
+  const apiBaseUrl = process.env.NEXT_PUBLIC_AIVISION_API_BASE_URL;
 
   const validateExtension = (value: string) => {
     const lower = value.toLowerCase();
@@ -54,7 +55,7 @@ export default function Home() {
       formData.append("file", selectedFile);
 
       const response = await fetch(
-        "https://localhost:7022/api/imageanalysis/analyse",
+        `${apiBaseUrl}/api/imageanalysis/analyse`,
         {
           method: "POST",
           body: formData,
@@ -99,7 +100,7 @@ export default function Home() {
         Url: urlValue
       }
       const response = await fetch(
-        "https://localhost:7022/api/imageanalysis/analyse",
+        `${apiBaseUrl}/api/imageanalysis/analyse`,
         {
           method: "POST",
           headers: {
@@ -149,7 +150,6 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Main Card */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
